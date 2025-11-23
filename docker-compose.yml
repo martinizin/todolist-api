@@ -1,11 +1,6 @@
-version: '3.8'
-
 services:
   todolist-api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: todolist-api:v2
+    image: docker.io/mattedlopez88/todolist-api:latest
     container_name: todolist-api-v2
     ports:
       - "8080:8080"
@@ -14,7 +9,7 @@ services:
       - JAVA_OPTS=-Xms256m -Xmx512m
       - SERVER_PORT=8080
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD-SHELL", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 30s
       timeout: 3s
       retries: 3
