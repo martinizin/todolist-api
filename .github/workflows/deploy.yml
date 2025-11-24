@@ -69,17 +69,3 @@ jobs:
               "docker compose up -d",
               "docker image prune -f"
             ]'
-
-#      - name: Deploy on EC
-#        uses: appleboy/ssh-action@v1.0.3
-#        with:
-#          host: ec2-44-220-63-126.compute-1.amazonaws.com
-#          username: ubuntu
-#          key: ${{ secrets.EC2_SSH_KEY }}
-#          script: |
-#            set -e
-#            cd /opt/todolist
-#            docker compose pull
-#            docker compose up -d
-#            docker image prune -f
-#            docker ps
