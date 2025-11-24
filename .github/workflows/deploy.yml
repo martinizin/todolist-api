@@ -70,7 +70,7 @@ jobs:
               "docker image prune -f"
             ]'
 
-#      - name: Deploy on EC2
+#      - name: Deploy on EC
 #        uses: appleboy/ssh-action@v1.0.3
 #        with:
 #          host: ec2-44-220-63-126.compute-1.amazonaws.com
