@@ -58,18 +58,28 @@ jobs:
           tags: |
             docker.io/mattedlopez88/todolist-api:latest
             docker.io/mattedlopez88/todolist-api:${{ github.sha }}
+      - name: Deploy using SSM
+        run: |
+          aws ssm send-command \
+            --instance-ids "${{ vars.EC2_INSTANCE_ID }}" \
+            --document-name "AWS-RunShellScript" \
+            --parameters commands='[
+              "cd /opt/todolist",
+              "docker compose pull",
+              "docker compose up -d",
+              "docker image prune -f"
+            ]'
 
-
-      - name: Deploy on EC2
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ec2-44-220-63-126.compute-1.amazonaws.com
-          username: ubuntu
+#      - name: Deploy on EC2
+#        uses: appleboy/ssh-action@v1.0.3
+#        with:
+#          host: ec2-44-220-63-126.compute-1.amazonaws.com
+#          username: ubuntu
 #          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            set -e
-            cd /opt/todolist
-            docker compose pull
-            docker compose up -d
-            docker image prune -f
-            docker ps
+#          script: |
+#            set -e
+#            cd /opt/todolist
+#            docker compose pull
+#            docker compose up -d
+#            docker image prune -f
+#            docker ps
