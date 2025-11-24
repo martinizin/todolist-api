@@ -61,7 +61,7 @@ jobs:
       - name: Deploy using SSM
         run: |
           aws ssm send-command \
-            --instance-ids "${{ vars.EC2_INSTANCE_ID }}" \
+            --instance-ids "i-06cc73a5df5695990" \
             --document-name "AWS-RunShellScript" \
             --parameters commands='[
               "cd /opt/todolist",
