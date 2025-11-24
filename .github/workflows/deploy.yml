@@ -63,9 +63,9 @@ jobs:
       - name: Deploy on EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.EC2_HOST }}
+          host: ec2-44-220-63-126.compute-1.amazonaws.com
           username: ubuntu
-          key: ${{ secrets.EC2_SSH_KEY }}
+#          key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             set -e
             cd /opt/todolist
