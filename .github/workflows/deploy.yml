@@ -5,8 +5,8 @@ on:
     branches: [ "master" ]
 
 permissions:
+  id-token: write
   contents: read
-  packages: write
 
 jobs:
   deploy:
@@ -15,6 +15,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::230225761161:role/github-action-role
+
+      - name: test aws connection
+        run: aws sts get-caller-identity
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
